@@ -1,0 +1,30 @@
+asgiref==3.8.1
+attrs==25.3.0
+bootstrap4==0.1.0
+certifi==2025.7.14
+cffi==1.17.1
+charset-normalizer==3.3.2
+cryptography==45.0.5
+Django==5.0.4
+h11==0.16.0
+idna==3.7
+outcome==1.3.0.post0
+pillow==10.3.0
+psycopg==3.2.1
+pycparser==2.22
+PySocks==1.7.1
+requests==2.31.0
+selenium==4.34.2
+setuptools==68.2.2
+sniffio==1.3.1
+sortedcontainers==2.4.0
+sqlparse @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/sqlparse_1699544474746/work
+stripe==9.3.0
+trio==0.30.0
+trio-websocket==0.12.2
+typing_extensions==4.14.1
+tzdata @ file:///croot/python-tzdata_1690578112552/work
+urllib3==2.5.0
+websocket-client==1.8.0
+wheel==0.41.2
+wsproto==1.2.0

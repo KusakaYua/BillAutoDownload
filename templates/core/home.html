@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h1 class="display-4 mb-4">請求書自動ダウンロードシステム</h1>
+        <p class="lead mb-5">
+            各取引先の請求書を自動的にダウンロードし、電子帳簿保存法に対応するサービスです。
+        </p>
+
+        {% if not user.is_authenticated %}
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">ログイン</a>
+            <a href="{% url 'signup' %}" class="btn btn-outline-secondary btn-lg">新規登録</a>
+        </div>
+        {% else %}
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">ダッシュボードへ</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

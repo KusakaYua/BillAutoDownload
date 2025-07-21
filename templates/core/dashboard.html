@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-4">ダッシュボード</h2>
+        
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                請求書サイト
+                <a href="{% url 'add_billing_site' %}" class="btn btn-sm btn-primary">新規追加</a>
+            </div>
+            <div class="card-body">
+                {% if billing_sites %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>サイト名</th>
+                                <th>最終ダウンロード</th>
+                                <th>アクション</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for site in billing_sites %}
+                            <tr>
+                                <td>{{ site.site_name }}</td>
+                                <td>
+                                    {% if site.last_downloaded %}
+                                        {{ site.last_downloaded|date:"Y/m/d H:i" }}
+                                    {% else %}
+                                        未ダウンロード
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary">詳細</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">請求書サイトが登録されていません。</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                最近のダウンロード
+                <a href="{% url 'bill_management' %}" class="btn btn-sm btn-outline-primary">すべて表示</a>
+            </div>
+            <div class="card-body">
+                {% if downloaded_bills %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>サイト</th>
+                                <th>ファイル名</th>
+                                <th>ダウンロード日</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bill in downloaded_bills|slice:":5" %}
+                            <tr>
+                                <td>{{ bill.site.site_name }}</td>
+                                <td>{{ bill.file_name }}</td>
+                                <td>{{ bill.download_date|date:"Y/m/d H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">ダウンロードされた請求書はありません。</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">アカウント情報</div>
+            <div class="card-body">
+                <p><strong>ユーザー名:</strong> {{ user.username }}</p>
+                <p><strong>メールアドレス:</strong> {{ user.email|default:"未設定" }}</p>
+                <p><strong>登録日:</strong> {{ user.date_joined|date:"Y/m/d" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

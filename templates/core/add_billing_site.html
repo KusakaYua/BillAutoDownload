@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">請求書サイト追加</h2>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.site_name.label }}</label>
+                        {{ form.site_name }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.login_url.label }}</label>
+                        {{ form.login_url }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.username.label }}</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.password.label }}</label>
+                        {{ form.password }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.download_frequency.label }}</label>
+                        {{ form.download_frequency }}
+                    </div>
+
+                    <div class="alert alert-warning" role="alert">
+                        <strong>注意:</strong> パスワードは暗号化して安全に保存されます。
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">サイト追加</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">キャンセル</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

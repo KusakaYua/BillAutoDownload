@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load form_tags %} 
+
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">新規登録</h2>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">ユーザー名</label>
+                        {{ form.username|add_class:"form-control" }}
+                        <small class="form-text text-muted">半角英数字と@/./+/-/_で入力してください。</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">パスワード</label>
+                        {{ form.password1|add_class:"form-control" }}
+                        <small class="form-text text-muted">8文字以上の強力なパスワードを設定してください。</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.password2.id_for_label }}" class="form-label">パスワード確認</label>
+                        {{ form.password2|add_class:"form-control" }}
+                        <small class="form-text text-muted">確認のため、もう一度同じパスワードを入力してください。</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">登録</button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p>すでにアカウントをお持ちの方は <a href="{% url 'login' %}">ログイン</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
